@@ -1,0 +1,7 @@
+$design_width: 3840; //设计稿的宽度，根据实际项目调整
+$design_height: 1000; //设计稿的高度，根据实际项目调整
+
+@function px2rem($px) {
+  $design_font_size: 12;
+  @return ($px/$design_font_size) + rem;
+}
