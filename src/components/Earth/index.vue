@@ -4,9 +4,10 @@
   </div>
   <div class="info-tag" v-show="visibelLabel">
     <div class="info-tag-inner">
-      <div class="info-tag-name">{{ labelContent.name }}</div>
-      <div class="info-tag-con">{{ labelContent.con }}</div>
-      <div class="info-tag-echarts">123</div>
+      <div class="info-tag-name">{{ labelContent.name }} Export and Import Data</div>
+      <div class="info-tag-echarts">
+        <trade-chart :data-key="labelContent.name" :country="labelContent.name" :key="labelContent.name"></trade-chart>
+      </div>
     </div>
     <div class="info-tag-close" @click="hide">x</div>
   </div>
@@ -15,8 +16,10 @@
 <script>
 import Earth3d from './Earth3D'
 import emitter from '@/utils/emitter'
+import TradeChart from '../Chart/TradeChart.vue'
 
 export default {
+  components: { TradeChart },
   data() {
     return {
       visibelLabel: false,
@@ -105,7 +108,6 @@ export default {
   }
   &-echarts {
     width: 100%;
-    height: 200px;
     background: #ccc;
   }
   &-close {

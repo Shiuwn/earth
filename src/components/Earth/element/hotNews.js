@@ -24,7 +24,6 @@ const covertData = data => {
 
 export default function createHotNew() {
   const HotNewsData = covertData(CoordinateData)
-  console.log(HotNewsData)
   // 飞线
   const { flyArc } = useArc({ R: config.R })
   return new Promise((resolve, reject) => {

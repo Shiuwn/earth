@@ -7,16 +7,20 @@ import useData from '../../hooks/useData'
 import { ref, watch } from 'vue'
 export default {
   components: { Chart },
+  props: {
+    country: String,
+  },
   setup(prop) {
-    const { importData, exportData } = useData()
+    const { importPromise, exportPromise } = useData()
     const option = ref(null)
-    watch([prop.country, importData, exportData], () => {
-      if (prop.country && importData.value && exportData.value) {
-        const { country } = prop
-        const subImport = importData.value.filter(d => d.Area === country)
-        const subExport = exportData.value.filter(d => d.Area === country)
+    const renderChart = () => {
+      const { country } = prop
+      Promise.all([importPromise, exportPromise]).then(([importData, exportData]) => {
+        const subImport = importData.filter(d => d.Area === country)
+        const subExport = exportData.filter(d => d.Area === country)
         const years = subImport.map(s => s.Year)
         option.value = {
+          legend: {},
           xAxis: {
             type: 'category',
             data: years,
@@ -37,8 +41,12 @@ export default {
             },
           ],
         }
-      }
+      })
+    }
+    watch(prop.country, () => {
+      prop.country && renderChart()
     })
+    prop.country && renderChart()
     return {
       option,
     }
