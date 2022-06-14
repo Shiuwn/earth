@@ -1,13 +1,13 @@
 <template>
   <div>
-    <!-- <earth ref="Earth"></earth> -->
+    <earth ref="Earth"></earth>
     <food-chart class="right-chart"></food-chart>
     <BDIChart class="left-chart"></BDIChart>
   </div>
 </template>
 
 <script>
-// import Earth from '@/components/Earth'
+import Earth from '@/components/Earth'
 import FoodChart from '../components/Chart/FoodChart.vue'
 import BDIChart from '../components/Chart/BDIChart.vue'
 
@@ -20,11 +20,11 @@ export default {
   },
 
   mounted() {
-    // this.$refs['Earth'].show()
+    this.$refs['Earth'].show()
   },
 
   components: {
-    // Earth,
+    Earth,
     FoodChart,
     BDIChart,
   },
@@ -39,16 +39,16 @@ html,
   width: 100%;
   height: 100%;
 }
-.right-chart {
+.right-chart,
+.left-chart {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translate(0, -50%);
+  z-index: 1;
 }
 .left-chart {
-  position: absolute;
   left: 0;
-  top: 50%;
-  transform: translate(0, -50%);
+  right: unset;
 }
 </style>
