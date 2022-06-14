@@ -1,5 +1,8 @@
 <template>
-  <Chart :option="option"></Chart>
+  <div class="chart-wrapper">
+    <h3>BDI Index Change by Time</h3>
+    <Chart :option="option" class="bdi-chart"></Chart>
+  </div>
 </template>
 <script>
 import { onMounted, ref } from 'vue'
@@ -13,15 +16,25 @@ export default {
     const option = ref(null)
     onMounted(async () => {
       try {
-        let data = await csv('./data/BDI.csv')
+        let data = await csv('./assets/data/BDI.csv')
         data = data.slice()
         option.value = {
           xAxis: {
             type: 'category',
             data: data.map(d => d.date),
+            axisLabel: {
+              textStyle: {
+                color: '#fff',
+              },
+            },
           },
           yAxis: {
             type: 'value',
+            axisLabel: {
+              textStyle: {
+                color: '#fff',
+              },
+            },
           },
           series: {
             name: 'BDI',
@@ -39,3 +52,12 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+.chart-wrapper {
+  color: #fff;
+  text-align: center;
+  .bdi-chart {
+    width: 500px;
+  }
+}
+</style>

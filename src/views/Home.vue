@@ -2,12 +2,14 @@
   <div>
     <!-- <earth ref="Earth"></earth> -->
     <food-chart class="right-chart"></food-chart>
+    <BDIChart class="left-chart"></BDIChart>
   </div>
 </template>
 
 <script>
 // import Earth from '@/components/Earth'
 import FoodChart from '../components/Chart/FoodChart.vue'
+import BDIChart from '../components/Chart/BDIChart.vue'
 
 export default {
   name: 'Home',
@@ -24,6 +26,7 @@ export default {
   components: {
     // Earth,
     FoodChart,
+    BDIChart,
   },
 }
 </script>
@@ -39,6 +42,12 @@ html,
 .right-chart {
   position: absolute;
   right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.left-chart {
+  position: absolute;
+  left: 0;
   top: 50%;
   transform: translate(0, -50%);
 }
