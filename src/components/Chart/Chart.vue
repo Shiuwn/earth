@@ -12,14 +12,13 @@ export default {
   setup(prop) {
     const chart = ref(null)
     const chartDom = ref(null)
-    const option = computed(() => prop.option)
     onMounted(() => {
-      chart.value = echarts.init(chartDom)
+      chart.value = echarts.init(chartDom.value)
     })
     watch(
-      () => option,
+      () => prop.option,
       () => {
-        chart.value?.setOption(option.value)
+        chart.value?.setOption(prop.option)
       },
     )
     return {

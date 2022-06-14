@@ -1,9 +1,11 @@
 <template>
-  <Chart :option="option"></Chart>
+  <div class="chart-wrapper">
+    <h3>Food Price Index Changes by Time</h3>
+    <Chart :option="option" class="food-chart"></Chart>
+  </div>
 </template>
 <script>
-import { defineComponent } from '@vue/composition-api'
-import { onMounted, ref } from '@vue/runtime-core'
+import { defineComponent, onMounted, ref } from 'vue'
 import csv from '@/utils/csv.js'
 import Chart from './Chart.vue'
 
@@ -13,7 +15,7 @@ export default defineComponent({
     const option = ref(null)
     onMounted(async () => {
       try {
-        let data = await csv('./data/annualFoodPrice.csv')
+        let data = await csv('./assets/data/annualFoodPrice.csv')
         const keys = data.columns.filter(d => d !== 'Year')
         data = data.slice()
         const years = data.map(d => d.Year)
@@ -27,13 +29,26 @@ export default defineComponent({
         option.value = {
           legend: {
             data: keys,
+            textStyle: {
+              color: '#fff',
+            },
           },
           xAxis: {
             type: 'category',
             data: years,
+            axisLabel: {
+              textStyle: {
+                color: '#fff',
+              },
+            },
           },
           yAxis: {
             type: 'value',
+            axisLabel: {
+              textStyle: {
+                color: '#fff',
+              },
+            },
           },
           series: genSeries(data),
         }
@@ -47,3 +62,12 @@ export default defineComponent({
   },
 })
 </script>
+<style lang="scss" scoped>
+.chart-wrapper {
+  color: #fff;
+  text-align: center;
+  .food-chart {
+    width: 500px;
+  }
+}
+</style>
